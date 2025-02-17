@@ -22,7 +22,7 @@ mongoose.connect('mongodb+srv://bobby:bobby@cluster0.b7fnq.mongodb.net/?retryWri
 
 // Routes
 app.use('/api/users', userRoutes);
-// Swagger setup
+// Swagger setup    
 swaggerSetup(app);
 // api health
 app.get('/',(rew,res)=>{

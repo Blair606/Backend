@@ -2,9 +2,33 @@ const bcrypt = require('bcryptjs');
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 
+// Sign Up Controller
 const signUp = async (req, res) => {
   try {
-    const { fullName, email, password, confirmPassword, role, studentId, lecturerId, parentId, adminCode, enableMFA } = req.body;
+    const {
+      firstName,
+      lastName,
+      email,
+      password,
+      confirmPassword,
+      role,
+      enableMFA,
+      studentId,
+      studyLevel,
+      school,
+      program,
+      specialization,
+      yearOfStudy,
+      semester,
+      dateOfBirth,
+      nationalId,
+      phone,
+      address,
+      guardians,
+      emergencyContact,
+      staffId,
+      department,
+    } = req.body;
 
     // Check if passwords match
     if (password !== confirmPassword) {
@@ -22,15 +46,27 @@ const signUp = async (req, res) => {
 
     // Create new user
     const newUser = new User({
-      fullName,
+      firstName,
+      lastName,
       email,
       password: hashedPassword,
       role,
-      studentId,
-      lecturerId,
-      parentId,
-      adminCode,
       enableMFA,
+      studentId,
+      studyLevel,
+      school,
+      program,
+      specialization,
+      yearOfStudy,
+      semester,
+      dateOfBirth,
+      nationalId,
+      phone,
+      address,
+      guardians,
+      emergencyContact,
+      staffId,
+      department,
     });
 
     // Save user to database
@@ -49,4 +85,86 @@ const signUp = async (req, res) => {
   }
 };
 
-module.exports = { signUp };
+// Get All Users Controller
+const getAllUsers = async (req, res) => {
+  try {
+    // Fetch all users from the database
+    const users = await User.find({}, { password: 0 }); // Exclude password field
+    res.status(200).json(users);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+// Get a Single User by ID Controller
+const getUserById = async (req, res) => {
+  try {
+    const userId = req.params.id;
+
+    // Fetch user by ID
+    const user = await User.findById(userId, { password: 0 }); // Exclude password field
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.status(200).json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+// Update a User Controller
+const updateUser = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const updateData = req.body;
+
+    // Check if the user exists
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Update user data
+    const updatedUser = await User.findByIdAndUpdate(userId, updateData, {
+      new: true, // Return the updated document
+      runValidators: true, // Run schema validators
+    }).select('-password'); // Exclude password field
+
+    res.status(200).json(updatedUser);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+// Delete a User Controller
+const deleteUser = async (req, res) => {
+  try {
+    const userId = req.params.id;
+
+    // Check if the user exists
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Delete the user
+    await User.findByIdAndDelete(userId);
+
+    res.status(200).json({ message: 'User deleted successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+module.exports = {
+  signUp,
+  getAllUsers,
+  getUserById,
+  updateUser,
+  deleteUser,
+};
