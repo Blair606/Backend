@@ -3,6 +3,10 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const userRoutes = require('./routes/userRoutes');
+const courseRoutes = require('./routes/courseRoutes');
+const departmentRoutes = require('./routes/departmentRoutes')
+const discussionGroupRoutes = require('./routes/discussionGroupRoutes');
+const assignmentsRoutes = require('./routes/assigments')
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -22,6 +26,10 @@ mongoose.connect('mongodb+srv://bobby:bobby@cluster0.b7fnq.mongodb.net/?retryWri
 
 // Routes
 app.use('/api/users', userRoutes);
+app.use('/api/courses', courseRoutes);
+app.use('/api/departments', departmentRoutes);
+app.use('/api/discussion-groups', discussionGroupRoutes);
+app.use('/api', assignmentsRoutes);
 // Swagger setup    
 swaggerSetup(app);
 // api health

@@ -11,7 +11,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /signup:
+ * /api/users/signup:
  *   post:
  *     summary: Register a new user
  *     tags: [Users]
@@ -153,7 +153,7 @@ router.post('/signup', signUp);
 
 /**
  * @swagger
- * /users:
+ * /api/users/users:
  *   get:
  *     summary: Get all users
  *     tags: [Users]
@@ -181,7 +181,7 @@ router.get('/users', getAllUsers);
 
 /**
  * @swagger
- * /users/{id}:
+ * /api/users/users/{id}:
  *   get:
  *     summary: Get a single user by ID
  *     tags: [Users]
@@ -273,7 +273,7 @@ router.put('/users/:id', updateUser);
 
 /**
  * @swagger
- * /users/{id}:
+ * /api/users/users/{id}:
  *   delete:
  *     summary: Delete a user by ID
  *     tags: [Users]

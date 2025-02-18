@@ -8,14 +8,14 @@ const swaggerOptions = {
     info: {
       title: 'Bobby API',
       version: '1.0.0',
-      description: 'API for managing users',
+      description: 'API for managing edu portal',
       contact: {
         name: 'Developer',
       },
     },
     servers: [
       {
-        url: 'http://localhost:5000/api/users', // Base URL for the API
+        url: 'http://localhost:5000', // Base URL for the API
         description: 'Local server',
       },
     ],
