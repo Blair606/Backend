@@ -7,9 +7,11 @@ const courseRoutes = require('./routes/courseRoutes');
 const departmentRoutes = require('./routes/departmentRoutes')
 const discussionGroupRoutes = require('./routes/discussionGroupRoutes');
 const assignmentsRoutes = require('./routes/assigments')
+const dotenv = require('dotenv')
+dotenv.config()
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 const swaggerSetup = require('./Swagger');
 
 // Middleware

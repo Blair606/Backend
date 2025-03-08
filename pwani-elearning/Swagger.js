@@ -15,7 +15,7 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: 'http://localhost:5000', // Base URL for the API
+        url: 'http://localhost:3000', // Base URL for the API
         description: 'Local server',
       },
     ],
