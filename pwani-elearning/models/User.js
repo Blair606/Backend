@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
   lastName: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  role: { type: String, enum: ['student', 'teacher'], default: 'student' },
+  role: { type: String, enum: ['student', 'teacher','admin','parent'], default: 'student' },
   enableMFA: { type: Boolean, default: false },
   studentId: { type: String }, // For students
   studyLevel: { type: String, enum: ['degree', 'diploma', 'certificate'] }, // For students
