@@ -7,6 +7,7 @@ const courseRoutes = require('./routes/courseRoutes');
 const departmentRoutes = require('./routes/departmentRoutes')
 const discussionGroupRoutes = require('./routes/discussionGroupRoutes');
 const assignmentsRoutes = require('./routes/assigments')
+const onlineClassRoutes = require('./routes/onlineClassRoutes');
 const dotenv = require('dotenv')
 dotenv.config()
 
@@ -32,6 +33,7 @@ app.use('/api/courses', courseRoutes);
 app.use('/api/departments', departmentRoutes);
 app.use('/api/discussion-groups', discussionGroupRoutes);
 app.use('/api', assignmentsRoutes);
+app.use('/api/online-classes',onlineClassRoutes)
 // Swagger setup    
 swaggerSetup(app);
 // api health

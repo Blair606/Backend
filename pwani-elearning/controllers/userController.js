@@ -185,7 +185,7 @@ const updateUser = async (req, res) => {
 // Delete a User Controller
 const deleteUser = async (req, res) => {
   try {
-    const userId = req.params.id;
+    const userId = req.params._id;
 
     // Check if the user exists
     const user = await User.findById(userId);
